@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+      http://www.liquibase.org/xml/ns/pro
+      http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
+    <includeAll path="/db/changelog/db-changelog.xml"/>
+    <changeSet id="CHATS" author="Kristupas">
+        <createTable tableName="CHATS">
+            <column name="ID" type="bigint" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CHATS"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="CREATE TABLE USERS" author="Kristupas">
+        <createTable tableName="USERS">
+            <column name="ID" type="bigint" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_USERS"/>
+            </column>
+            <column name="EMAIL" type="varchar(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="varchar(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SURNAME" type="varchar(25)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="CREATE TABLE MESSAGES" author="Kristupas">
+        <createTable tableName="MESSAGES">
+            <column name="ID" type="bigint" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_MESSAGES"/>
+            </column>
+            <column name="CREATED_AT" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TEXT" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CHAT_ID" type="bigint">
+                <constraints nullable="false" foreignKeyName="FK_CHAT_ID" references="CHATS(id)"/>
+            </column>
+            <column name="USER_ID" type="bigint">
+                <constraints nullable="false" foreignKeyName="FK_USER_ID" references="USERS(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="CREATE TABLE CHATS_USERS" author="Kristupas">
+        <createTable tableName="CHATS_USERS">
+            <column name="CHATS_ID" type="bigint">
+                <constraints nullable="false" foreignKeyName="FK_CHATS_ID" references="CHATS(id)"/>
+            </column>
+            <column name="USERS_ID" type="bigint">
+                <constraints nullable="false" foreignKeyName="FK_USERS_ID" references="USERS(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="INSERT USERS" author="Kristupas">
+        <insert tableName="USERS">
+            <column name="EMAIL" value="ho@gmail.com"></column>
+            <column name="NAME" value="nemo"></column>
+            <column name="SURNAME" value="demo"></column>
+        </insert>
+    </changeSet>
+    <changeSet id="INSERT CHATS" author="Kristupas">
+        <insert tableName="CHATS">
+            <column autoIncrement="true" ></column>
+        </insert>
+    </changeSet>
+    <changeSet id="INSERT CHATS_USERS" author="Kristupas">
+        <insert tableName="CHATS_USERS">
+            <column name="CHATS_ID" value="1"></column>
+            <column name="USERS_ID" value="1"></column>
+        </insert>
+    </changeSet>
+    <changeSet id="INSERT MESSAGE" author="Kristupas">
+        <insert tableName="MESSAGES">
+            <column name="CREATED_AT" value="2022-08-24T20:20:00"></column>
+            <column name="TEXT" value="hello"></column>
+            <column name="CHAT_ID" value="1"></column>
+            <column name="USER_ID" value="1"></column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

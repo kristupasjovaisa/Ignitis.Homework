@@ -14,3 +14,5 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
+  liquibase:
+    change-log: classpath:db/changelog/db-changelog.xml
