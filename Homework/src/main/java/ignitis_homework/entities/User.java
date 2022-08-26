@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Builder
@@ -18,4 +19,10 @@ public class User {
     private String name;
     private String surname;
     private String email;
+
+    @OneToMany(mappedBy = "user")
+    private List<Message> messages;
+
+    @ManyToMany(mappedBy = "users")
+    private List<Chat> chats;
 }

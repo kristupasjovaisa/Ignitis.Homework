@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Builder
 @NoArgsConstructor
@@ -15,4 +16,10 @@ public class Chat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
+
+    @ManyToMany
+    private List<User> users;
+
+    @OneToMany(mappedBy = "chat")
+    private List<Message> messages;
 }

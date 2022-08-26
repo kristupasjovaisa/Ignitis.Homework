@@ -18,4 +18,10 @@ public class Message {
     private Long id;
     private String text;
     private Timestamp createdAt;
+
+    @ManyToOne
+    private Chat chat;
+
+    @ManyToOne
+    private User user;
 }
