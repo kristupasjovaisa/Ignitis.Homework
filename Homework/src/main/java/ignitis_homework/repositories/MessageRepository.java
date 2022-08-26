@@ -6,8 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface MessageRepository extends JpaRepository<Message, Long> {
-
-    Optional<Message> findFirstByFirstMessageDesc();
-
-    Optional<Message> findFirstByLastMessageAsc();
+    Optional<Message> findFirstByOrderByCreatedAtDesc();
+    Optional<Message> findFirstByOrderByCreatedAtAsc();
 }
