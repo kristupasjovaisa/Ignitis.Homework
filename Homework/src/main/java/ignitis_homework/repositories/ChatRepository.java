@@ -2,8 +2,7 @@ package ignitis_homework.repositories;
 
 
 import ignitis_homework.entities.Chat;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
-public interface ChatRepository extends JpaRepository<Chat,Long> {
-
+public interface ChatRepository extends CrudRepository<Chat,Long> {
 }
