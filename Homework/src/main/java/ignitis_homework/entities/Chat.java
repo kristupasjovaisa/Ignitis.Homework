@@ -1,11 +1,9 @@
 package ignitis_homework.entities;
 
 import lombok.*;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Builder
 @NoArgsConstructor

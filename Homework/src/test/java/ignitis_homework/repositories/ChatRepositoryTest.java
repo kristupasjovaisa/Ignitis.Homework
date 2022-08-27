@@ -9,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.stream.Collectors;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -23,5 +25,16 @@ class ChatRepositoryTest {
     void findByUserIds() {
         assertTrue(chatRepository.findByUserId(3l).isEmpty());
         assertEquals(1l, chatRepository.findByUserId(1l).get().getId());
+    }
+
+    @Test
+    void findAllByUserId() {
+        var chats = chatRepository.findAllByUserId(1l)
+                .stream()
+                .map(chat -> chat.getId())
+                .collect(Collectors.toList());
+        assertEquals(2l, chats.size());
+        assertTrue(chats.contains(1l));
+        assertTrue(chats.contains(2l));
     }
 }

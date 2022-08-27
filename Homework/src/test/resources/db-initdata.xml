@@ -19,10 +19,18 @@
             <column name="EMAIL" value="user2@gmail.com"></column>
             <column name="NAME" value="user2"></column>
         </insert>
+        <insert tableName="USERS">
+            <column name="ID" value="3"></column>
+            <column name="EMAIL" value="user3@gmail.com"></column>
+            <column name="NAME" value="user3"></column>
+        </insert>
     </changeSet>
     <changeSet id="INSERT CHATS" author="Kristupas">
         <insert tableName="CHATS">
             <column name="ID" value="1"></column>
+        </insert>
+        <insert tableName="CHATS">
+            <column name="ID" value="2"></column>
         </insert>
     </changeSet>
     <changeSet id="INSERT CHATS_USERS" author="Kristupas">
@@ -33,6 +41,14 @@
         <insert tableName="CHATS_USERS">
             <column name="CHATS_ID" value="1"></column>
             <column name="USERS_ID" value="2"></column>
+        </insert>
+        <insert tableName="CHATS_USERS">
+            <column name="CHATS_ID" value="2"></column>
+            <column name="USERS_ID" value="1"></column>
+        </insert>
+        <insert tableName="CHATS_USERS">
+            <column name="CHATS_ID" value="2"></column>
+            <column name="USERS_ID" value="3"></column>
         </insert>
     </changeSet>
     <changeSet id="INSERT MESSAGE" author="Kristupas">
@@ -49,6 +65,20 @@
             <column name="TEXT" value="Hello user1"></column>
             <column name="CHAT_ID" value="1"></column>
             <column name="USER_ID" value="2"></column>
+        </insert>
+        <insert tableName="MESSAGES">
+            <column name="ID" value="3"></column>
+            <column name="CREATED_AT" value="2021-01-01T20:20:00"></column>
+            <column name="TEXT" value="Hello user3"></column>
+            <column name="CHAT_ID" value="2"></column>
+            <column name="USER_ID" value="1"></column>
+        </insert>
+        <insert tableName="MESSAGES">
+            <column name="ID" value="4"></column>
+            <column name="CREATED_AT" value="2021-08-24T21:20:00"></column>
+            <column name="TEXT" value="Hello user1"></column>
+            <column name="CHAT_ID" value="2"></column>
+            <column name="USER_ID" value="3"></column>
         </insert>
     </changeSet>
 </databaseChangeLog>

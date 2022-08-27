@@ -20,7 +20,7 @@ public class ChatMapper {
                 .id(chat.getId())
                 .users(chat.getUsers()
                         .stream()
-                        .map(userMapper::mapFrom)
+                        .map(user -> userMapper.mapFrom(user))
                         .collect(Collectors.toList()))
                 .build();
     }
