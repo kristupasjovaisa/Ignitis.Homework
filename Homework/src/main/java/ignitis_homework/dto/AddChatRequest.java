@@ -6,5 +6,5 @@ import lombok.Data;
 @Builder
 @Data
 public class AddChatRequest {
-    private Long userId;
+    private Long receiver;
 }

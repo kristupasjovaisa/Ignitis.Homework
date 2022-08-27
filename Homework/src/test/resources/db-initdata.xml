@@ -29,6 +29,9 @@
         <insert tableName="CHATS_USERS">
             <column name="CHATS_ID" value="1"></column>
             <column name="USERS_ID" value="1"></column>
+        </insert>
+        <insert tableName="CHATS_USERS">
+            <column name="CHATS_ID" value="1"></column>
             <column name="USERS_ID" value="2"></column>
         </insert>
     </changeSet>
