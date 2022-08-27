@@ -57,39 +57,4 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="INSERT USERS" author="Kristupas">
-        <insert tableName="USERS">
-            <column name="EMAIL" value="user1@gmail.com"></column>
-            <column name="NAME" value="user1"></column>
-        </insert>
-        <insert tableName="USERS">
-            <column name="EMAIL" value="user2@gmail.com"></column>
-            <column name="NAME" value="user2"></column>
-        </insert>
-    </changeSet>
-    <changeSet id="INSERT CHATS" author="Kristupas">
-        <insert tableName="CHATS">
-            <column autoIncrement="true" ></column>
-        </insert>
-    </changeSet>
-    <changeSet id="INSERT CHATS_USERS" author="Kristupas">
-        <insert tableName="CHATS_USERS">
-            <column name="CHATS_ID" value="1"></column>
-            <column name="USERS_ID" value="1"></column>
-        </insert>
-    </changeSet>
-    <changeSet id="INSERT MESSAGE" author="Kristupas">
-        <insert tableName="MESSAGES">
-            <column name="CREATED_AT" value="2022-08-24T20:20:00"></column>
-            <column name="TEXT" value="Hello user2"></column>
-            <column name="CHAT_ID" value="1"></column>
-            <column name="USER_ID" value="1"></column>
-        </insert>
-        <insert tableName="MESSAGES">
-            <column name="CREATED_AT" value="2022-08-24T20:20:00"></column>
-            <column name="TEXT" value="Hello user1"></column>
-            <column name="CHAT_ID" value="1"></column>
-            <column name="USER_ID" value="2"></column>
-        </insert>
-    </changeSet>
 </databaseChangeLog>
