@@ -31,4 +31,16 @@ class ChatRepositoryTest {
         assertTrue(chats.contains(1l));
         assertTrue(chats.contains(2l));
     }
+
+    @Test
+    void findByUserIdsReturnsChat() {
+        var chat = chatRepository.findByUserIds(1l, 2l);
+        assertEquals(1l, chat.get().getId());
+    }
+
+    @Test
+    void findByUserIdsEmpty() {
+        var chat = chatRepository.findByUserIds(1l, 4l);
+        assertTrue(chat.isEmpty());
+    }
 }
