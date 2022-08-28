@@ -26,15 +26,9 @@ public class ChatService {
         var sender = userRepository.findById(senderId);
         var receiver = userRepository.findById(addChat.getReceiver());
         if (sender.isPresent() && receiver.isPresent()) {
-            var commonChat = chatRepository
-                    .findAllByUserId(senderId).stream()
-                    .filter(chat ->
-                            chat.getUsers().stream().map(user -> user.getId()).collect(Collectors.toList())
-                                    .contains(receiver.get().getId())
-                    )
-                    .findFirst();
-            if (commonChat.isPresent()) {
-                return commonChat;
+            var chat = chatRepository.findByUserIds(senderId, receiver.get().getId());
+            if (chat.isPresent()) {
+                return chat;
             }
             return Optional.of(chatRepository.save(mapper.mapFrom(sender.get(), receiver.get())));
         }
