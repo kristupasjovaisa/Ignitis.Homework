@@ -22,12 +22,6 @@ class ChatRepositoryTest {
     ChatRepository chatRepository;
 
     @Test
-    void findByUserIds() {
-        assertTrue(chatRepository.findByUserId(3l).isEmpty());
-        assertEquals(1l, chatRepository.findByUserId(1l).get().getId());
-    }
-
-    @Test
     void findAllByUserId() {
         var chats = chatRepository.findAllByUserId(1l)
                 .stream()
