@@ -9,5 +9,4 @@ import java.sql.Timestamp;
 @Data
 public class AddMessageRequest {
     private String text;
-    private Timestamp createdAt;
 }
