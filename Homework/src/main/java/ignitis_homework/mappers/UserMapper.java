@@ -1,4 +1,4 @@
-package ignitis_homework.mapper;
+package ignitis_homework.mappers;
 
 import ignitis_homework.dto.UserResponse;
 import ignitis_homework.entities.User;

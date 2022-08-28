@@ -5,7 +5,7 @@ import ignitis_homework.dto.MessageResponse;
 import ignitis_homework.entities.Chat;
 import ignitis_homework.entities.Message;
 import ignitis_homework.entities.User;
-import ignitis_homework.mapper.MessageMapper;
+import ignitis_homework.mappers.MessageMapper;
 import ignitis_homework.repositories.ChatRepository;
 import ignitis_homework.repositories.MessageRepository;
 import ignitis_homework.repositories.UserRepository;

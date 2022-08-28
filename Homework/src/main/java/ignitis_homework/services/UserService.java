@@ -2,7 +2,7 @@ package ignitis_homework.services;
 
 import ignitis_homework.dto.UserResponse;
 import ignitis_homework.entities.User;
-import ignitis_homework.mapper.UserMapper;
+import ignitis_homework.mappers.UserMapper;
 import ignitis_homework.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

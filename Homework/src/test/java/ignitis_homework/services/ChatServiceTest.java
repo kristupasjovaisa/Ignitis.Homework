@@ -4,7 +4,7 @@ import ignitis_homework.dto.AddChatRequest;
 import ignitis_homework.dto.ChatResponse;
 import ignitis_homework.entities.Chat;
 import ignitis_homework.entities.User;
-import ignitis_homework.mapper.ChatMapper;
+import ignitis_homework.mappers.ChatMapper;
 import ignitis_homework.repositories.ChatRepository;
 import ignitis_homework.repositories.UserRepository;
 import org.junit.jupiter.api.Assertions;
