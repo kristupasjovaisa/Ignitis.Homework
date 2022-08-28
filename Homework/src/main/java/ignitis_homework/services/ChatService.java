@@ -26,7 +26,7 @@ public class ChatService {
         var sender = userRepository.findById(senderId);
         var receiver = userRepository.findById(addChat.getReceiver());
         if (sender.isPresent() && receiver.isPresent()) {
-            var chat = chatRepository.findByUserIds(senderId, receiver.get().getId());
+            var chat = chatRepository.findByUserIds(sender.get().getId(), receiver.get().getId());
             if (chat.isPresent()) {
                 return chat;
             }
