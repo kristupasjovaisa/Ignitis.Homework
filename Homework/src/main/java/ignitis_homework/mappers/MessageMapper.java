@@ -15,7 +15,7 @@ public class MessageMapper {
     public MessageResponse mapFrom(Message message) {
         return MessageResponse.builder()
                 .id(message.getId())
-                .createdAt(message.getCreatedAt())
+                .createdAt(String.valueOf(message.getCreatedAt()))
                 .text(message.getText())
                 .build();
     }

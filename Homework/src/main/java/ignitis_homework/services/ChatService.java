@@ -22,15 +22,15 @@ public class ChatService {
     private final UserRepository userRepository;
     private final ChatMapper mapper;
 
-    public Optional<Chat> addChat(AddChatRequest addChat, Long senderId) {
+    public Optional<ChatResponse> addChat(AddChatRequest addChat, Long senderId) {
         var sender = userRepository.findById(senderId);
-        var receiver = userRepository.findById(addChat.getReceiver());
+        var receiver = userRepository.findById(Long.valueOf(addChat.getReceiver()));
         if (sender.isPresent() && receiver.isPresent()) {
             var chat = chatRepository.findByUserIds(sender.get().getId(), receiver.get().getId());
             if (chat.isPresent()) {
-                return chat;
+                return Optional.of(mapper.mapfrom(chat.get()));
             }
-            return Optional.of(chatRepository.save(mapper.mapFrom(sender.get(), receiver.get())));
+            return Optional.of(mapper.mapfrom(chatRepository.save(mapper.mapFrom(sender.get(), receiver.get()))));
         }
         return Optional.empty();
     }

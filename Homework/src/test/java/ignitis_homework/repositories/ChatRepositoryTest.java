@@ -1,7 +1,5 @@
 package ignitis_homework.repositories;
 
-import ignitis_homework.entities.User;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 @Transactional
 class ChatRepositoryTest {
-
     @Autowired
     ChatRepository chatRepository;
 

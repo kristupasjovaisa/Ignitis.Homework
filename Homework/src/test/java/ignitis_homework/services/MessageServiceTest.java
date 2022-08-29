@@ -22,19 +22,14 @@ import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 class MessageServiceTest {
-
     @InjectMocks
     MessageService messageService;
-
     @Mock
     MessageRepository messageRepository;
-
     @Mock
     ChatRepository chatRepository;
-
     @Mock
     UserRepository userRepository;
-
     @Mock
     MessageMapper mapper;
 

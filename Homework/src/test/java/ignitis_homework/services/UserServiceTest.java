@@ -20,13 +20,10 @@ import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
-
     @InjectMocks
     private UserService userService;
-
     @Mock
     private UserMapper mapper;
-
     @Mock
     private UserRepository userRepository;
 
