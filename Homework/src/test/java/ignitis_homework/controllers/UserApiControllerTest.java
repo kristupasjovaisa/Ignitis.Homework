@@ -108,6 +108,13 @@ class UserApiControllerTest {
                 .andExpect(MockMvcResultMatchers.content().string(asJsonString(response)));
     }
 
+    @Test
+    void deleteUser() throws Exception {
+        when(userService.deleteUser(1l)).thenReturn(true);
+        mockMvc.perform(MockMvcRequestBuilders.delete("/users/{userId}", 1))
+                .andExpect(status().isOk());
+    }
+
     private static String asJsonString(final Object obj) {
         try {
             return new ObjectMapper().writeValueAsString(obj);
