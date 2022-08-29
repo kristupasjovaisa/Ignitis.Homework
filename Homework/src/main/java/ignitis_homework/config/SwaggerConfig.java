@@ -2,14 +2,18 @@ package ignitis_homework.config;
 
 import ignitis_homework.common.OpenApi;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Collections;
 
+@Configuration
+@EnableSwagger2
 public class SwaggerConfig {
 
     @Bean
@@ -23,13 +27,13 @@ public class SwaggerConfig {
 
     private static ApiInfo getInfo() {
         return new ApiInfo(
-                "Ignitis homework RestFull Api Documentation",
-                "This is simple documentation using swagger and springFox",
-                "0.0.1",
-                "Ignitis homework term URL",
-                new Contact("Kristupas Jovaiša", "www.ignitishomework.com", "kristupas.jovaisa03@gmail.com"),
-                "Ignitis homework licence",
-                "Licence URL",
+                "Ignitis homework RESTful API Documentation",
+                "This is a simple documentation using swagger and springFox",
+                "1.0.0",
+                null,
+                new Contact("Kristupas Jovaiša", null, "kristupas.jovaisa03@gmail.com"),
+                null,
+                null,
                 Collections.emptyList()
         );
     }
