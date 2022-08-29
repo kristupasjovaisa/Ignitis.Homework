@@ -42,7 +42,7 @@ class ChatServiceTest {
         var chat = Chat.builder().id(1l).build();
         Mockito.when(chatRepository.findByUserIds(10l, 20l)).thenReturn(Optional.of(chat));
         Mockito.when(mapper.mapfrom(chat)).thenReturn(ChatResponse.builder().id(2l).build());
-        var request = AddChatRequest.builder().receiver(2l).build();
+        var request = AddChatRequest.builder().receiverId(2l).build();
         var actual = chatService.addChat(request, 1l);
 
         Mockito.verify(chatRepository, Mockito.times(0)).save(any());
@@ -63,7 +63,7 @@ class ChatServiceTest {
         var createdChat = Chat.builder().id(2l).build();
         Mockito.when(chatRepository.save(chat)).thenReturn(createdChat);
         Mockito.when(mapper.mapfrom(createdChat)).thenReturn(ChatResponse.builder().id(3l).build());
-        var request = AddChatRequest.builder().receiver(2l).build();
+        var request = AddChatRequest.builder().receiverId(2l).build();
         var actual = chatService.addChat(request, 1l);
         Assertions.assertEquals(3l, actual.get().getId());
     }

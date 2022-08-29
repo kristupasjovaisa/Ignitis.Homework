@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddChatRequest {
-    Long receiver;
+    Long receiverId;
 }
