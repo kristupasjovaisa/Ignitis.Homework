@@ -3,7 +3,7 @@ package ignitis_homework.services;
 import ignitis_homework.dto.AddMessageRequest;
 import ignitis_homework.dto.MessageResponse;
 import ignitis_homework.entities.Chat;
-import ignitis_homework.mapper.MessageMapper;
+import ignitis_homework.mappers.MessageMapper;
 import ignitis_homework.repositories.ChatRepository;
 import ignitis_homework.repositories.MessageRepository;
 import ignitis_homework.repositories.UserRepository;
@@ -27,8 +27,7 @@ public class MessageService {
     public List<MessageResponse> getAllMessages(Long userId, Long chatId) {
         var chat = chatRepository.findById(chatId);
         if (chat.isPresent()) {
-            var userIds = chat.get().getUsers().stream().map(user -> user.getId()).collect(Collectors.toList());
-            if (userIds.contains(userId)) {
+            if (isChatContainingUser(chat.get(), userId)) {
                 return messageRepository.findAllByChatId(chat.get().getId()).stream().map(mapper::mapFrom).collect(Collectors.toList());
             }
         }
@@ -36,15 +35,19 @@ public class MessageService {
     }
 
     public Optional<MessageResponse> addMessage(AddMessageRequest message, Long userId, Long chatId) {
-        var userEntity = userRepository.findById(userId);
+        var user = userRepository.findById(userId);
         var chat = chatRepository.findById(chatId);
-        if (userEntity.isPresent() && chat.isPresent()) {
-            var userIds = chat.get().getUsers().stream().map(user -> user.getId()).collect(Collectors.toList());
-            if (userIds.contains(userId)) {
-                var createdChat = messageRepository.save(mapper.mapFrom(message, userEntity.get(), chat.get()));
+        if (user.isPresent() && chat.isPresent()) {
+            if (isChatContainingUser(chat.get(), userId)) {
+                var createdChat = messageRepository.save(mapper.mapFrom(message, user.get(), chat.get()));
                 return Optional.of(mapper.mapFrom(createdChat));
             }
         }
         return Optional.empty();
+    }
+
+    private boolean isChatContainingUser(Chat chat, Long userId) {
+        var userIds = chat.getUsers().stream().map(user -> user.getId()).collect(Collectors.toList());
+        return userIds.contains(userId);
     }
 }

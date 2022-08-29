@@ -2,7 +2,7 @@ package ignitis_homework.services;
 
 import ignitis_homework.dto.UserResponse;
 import ignitis_homework.entities.User;
-import ignitis_homework.mapper.UserMapper;
+import ignitis_homework.mappers.UserMapper;
 import ignitis_homework.repositories.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,13 +20,10 @@ import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
-
     @InjectMocks
     private UserService userService;
-
     @Mock
     private UserMapper mapper;
-
     @Mock
     private UserRepository userRepository;
 

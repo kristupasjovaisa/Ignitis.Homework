@@ -1,4 +1,4 @@
-package ignitis_homework.mapper;
+package ignitis_homework.mappers;
 
 import ignitis_homework.dto.AddMessageRequest;
 import ignitis_homework.dto.MessageResponse;
@@ -8,7 +8,6 @@ import ignitis_homework.entities.User;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 @Component
 public class MessageMapper {
@@ -16,7 +15,7 @@ public class MessageMapper {
     public MessageResponse mapFrom(Message message) {
         return MessageResponse.builder()
                 .id(message.getId())
-                .createdAt(message.getCreatedAt())
+                .createdAt(String.valueOf(message.getCreatedAt()))
                 .text(message.getText())
                 .build();
     }

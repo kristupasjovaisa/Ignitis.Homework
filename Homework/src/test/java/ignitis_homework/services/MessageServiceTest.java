@@ -5,7 +5,7 @@ import ignitis_homework.dto.MessageResponse;
 import ignitis_homework.entities.Chat;
 import ignitis_homework.entities.Message;
 import ignitis_homework.entities.User;
-import ignitis_homework.mapper.MessageMapper;
+import ignitis_homework.mappers.MessageMapper;
 import ignitis_homework.repositories.ChatRepository;
 import ignitis_homework.repositories.MessageRepository;
 import ignitis_homework.repositories.UserRepository;
@@ -17,27 +17,19 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @ExtendWith(MockitoExtension.class)
 class MessageServiceTest {
-
     @InjectMocks
     MessageService messageService;
-
     @Mock
     MessageRepository messageRepository;
-
     @Mock
     ChatRepository chatRepository;
-
     @Mock
     UserRepository userRepository;
-
     @Mock
     MessageMapper mapper;
 
