@@ -12,9 +12,6 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // Disable CSRF
-        http
-                .csrf().disable();
 
         // Set session management to stateless
         http = http
