@@ -21,9 +21,9 @@ import java.util.List;
 @OpenApi
 @Api(tags = "Reports Controller")
 @ApiResponses(value = @ApiResponse(code = 401, message = "User must be authorized"))
-@RequestMapping(ReportsApiController.REPORTS_ROOT_PATH)
+@RequestMapping(ReportApiController.REPORTS_ROOT_PATH)
 @RequiredArgsConstructor
-public class ReportsApiController {
+public class ReportApiController {
     private final UserService userService;
     public static final String REPORTS_ROOT_PATH = "/reports";
     public static final String REPORTS_USERS_PATH = "/users";

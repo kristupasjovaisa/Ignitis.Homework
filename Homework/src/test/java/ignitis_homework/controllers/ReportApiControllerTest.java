@@ -17,12 +17,11 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(controllers = ReportsApiController.class)
-class ReportsApiControllerTest {
+@WebMvcTest(controllers = ReportApiController.class)
+class ReportApiControllerTest {
 
     private MockMvc mockMvc;
 
@@ -30,7 +29,7 @@ class ReportsApiControllerTest {
     private UserService userService;
 
     @InjectMocks
-    ReportsApiController reportsApiController;
+    ReportApiController reportsApiController;
 
     @BeforeEach
     public void setUp(WebApplicationContext context) {
