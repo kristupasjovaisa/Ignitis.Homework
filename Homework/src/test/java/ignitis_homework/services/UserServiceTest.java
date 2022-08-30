@@ -5,7 +5,6 @@ import ignitis_homework.dto.UserResponse;
 import ignitis_homework.entities.User;
 import ignitis_homework.mappers.UserMapper;
 import ignitis_homework.repositories.UserRepository;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -78,5 +77,15 @@ class UserServiceTest {
         var actual = userService.getUserReports();
         assertEquals(1, actual.size());
         assertEquals("text", actual.get(0).getLastMessageText());
+    }
+
+    @Test
+    void getUserReport() {
+        var user = User.builder().id(2l).build();
+        var userReport = UserReportResponse.builder().lastMessageText("text").build();
+        Mockito.when(userRepository.findById(1l)).thenReturn(Optional.of(user));
+        Mockito.when(mapper.mapToReportFrom(user)).thenReturn(userReport);
+        var actual = userService.getUserReport(1l);
+        assertEquals("text", actual.get().getLastMessageText());
     }
 }

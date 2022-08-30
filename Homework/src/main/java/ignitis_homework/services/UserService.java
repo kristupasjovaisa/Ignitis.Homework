@@ -45,4 +45,8 @@ public class UserService {
                 .map(mapper::mapToReportFrom)
                 .collect(Collectors.toList());
     }
+
+    public Optional<UserReportResponse> getUserReport(Long userId) {
+        return userRepository.findById(userId).map(mapper::mapToReportFrom);
+    }
 }
