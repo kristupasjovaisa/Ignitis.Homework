@@ -1,5 +1,6 @@
 package ignitis_homework.services;
 
+import ignitis_homework.dto.UserReportResponse;
 import ignitis_homework.dto.UserResponse;
 import ignitis_homework.entities.User;
 import ignitis_homework.mappers.UserMapper;
@@ -66,5 +67,16 @@ class UserServiceTest {
         List<UserResponse> actual = userService.getAllUsers();
         assertEquals(2l, actual.get(0).getId());
         assertEquals(1, actual.size());
+    }
+
+    @Test
+    void getUserReports() {
+        var user = User.builder().id(1l).build();
+        var userReport = UserReportResponse.builder().lastMessageText("text").build();
+        Mockito.when(userRepository.findAll()).thenReturn(List.of(user));
+        Mockito.when(mapper.mapToReportFrom(user)).thenReturn(userReport);
+        var actual = userService.getUserReports();
+        assertEquals(1, actual.size());
+        assertEquals("text", actual.get(0).getLastMessageText());
     }
 }

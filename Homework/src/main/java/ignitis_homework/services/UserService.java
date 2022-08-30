@@ -1,5 +1,6 @@
 package ignitis_homework.services;
 
+import ignitis_homework.dto.UserReportResponse;
 import ignitis_homework.dto.UserResponse;
 import ignitis_homework.entities.User;
 import ignitis_homework.mappers.UserMapper;
@@ -36,6 +37,12 @@ public class UserService {
     public List<UserResponse> getAllUsers() {
         return userRepository.findAll().stream()
                 .map(mapper::mapFrom)
+                .collect(Collectors.toList());
+    }
+
+    public List<UserReportResponse> getUserReports() {
+        return userRepository.findAll().stream()
+                .map(mapper::mapToReportFrom)
                 .collect(Collectors.toList());
     }
 }

@@ -11,6 +11,6 @@ public class UserReportResponse {
     private Integer messagesCount;
     private String firstMessageDate;
     private String lastMessageDate;
-    private Integer averageMessageLength;
+    private Double averageMessageLength;
     private String lastMessageText;
 }
