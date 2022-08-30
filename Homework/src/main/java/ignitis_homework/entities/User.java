@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Builder
@@ -20,10 +21,14 @@ public class User {
     private Long id;
     private String name;
     private String email;
+    private String password;
 
     @OneToMany(mappedBy = "user")
     private List<Message> messages;
 
     @ManyToMany(mappedBy = "users",cascade = CascadeType.ALL)
     private List<Chat> chats;
+
+    @ManyToMany
+    private Set<Authority> authorities;
 }
