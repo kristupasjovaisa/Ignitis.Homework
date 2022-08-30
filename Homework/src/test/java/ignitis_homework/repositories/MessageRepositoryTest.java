@@ -1,6 +1,5 @@
 package ignitis_homework.repositories;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.Collectors;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")
@@ -22,13 +24,13 @@ class MessageRepositoryTest {
     @Test
     void findFirstByOrderByCreatedAtDesc() {
         var actual = messageRepository.findFirstByOrderByCreatedAtDesc();
-        Assertions.assertEquals(4, actual.get().getId());
+        assertEquals(4, actual.get().getId());
     }
 
     @Test
     void findFirstByOrderByCreatedAtAsc() {
         var actual = messageRepository.findFirstByOrderByCreatedAtAsc();
-        Assertions.assertEquals(1, actual.get().getId());
+        assertEquals(1, actual.get().getId());
     }
 
     @Test
@@ -37,8 +39,7 @@ class MessageRepositoryTest {
                 .map(message -> message.getId())
                 .collect(Collectors.toList());
 
-        Assertions.assertEquals(2, actual.size());
-        Assertions.assertTrue(actual.contains(1l));
-        Assertions.assertTrue(actual.contains(2l));
+        assertEquals(2, actual.size());
+        assertTrue(actual.contains(2l));
     }
 }

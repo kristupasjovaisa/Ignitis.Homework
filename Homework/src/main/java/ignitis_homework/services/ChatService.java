@@ -2,7 +2,6 @@ package ignitis_homework.services;
 
 import ignitis_homework.dto.AddChatRequest;
 import ignitis_homework.dto.ChatResponse;
-import ignitis_homework.entities.Chat;
 import ignitis_homework.mappers.ChatMapper;
 import ignitis_homework.repositories.ChatRepository;
 import ignitis_homework.repositories.UserRepository;
@@ -28,14 +27,14 @@ public class ChatService {
         if (sender.isPresent() && receiver.isPresent()) {
             var chat = chatRepository.findByUserIds(sender.get().getId(), receiver.get().getId());
             if (chat.isPresent()) {
-                return Optional.of(mapper.mapfrom(chat.get()));
+                return Optional.of(mapper.mapFrom(chat.get()));
             }
-            return Optional.of(mapper.mapfrom(chatRepository.save(mapper.mapFrom(sender.get(), receiver.get()))));
+            return Optional.of(mapper.mapFrom(chatRepository.save(mapper.mapFrom(sender.get(), receiver.get()))));
         }
         return Optional.empty();
     }
 
     public List<ChatResponse> getChats(Long userId) {
-        return chatRepository.findAllByUserId(userId).stream().map(mapper::mapfrom).collect(Collectors.toList());
+        return chatRepository.findAllByUserId(userId).stream().map(mapper::mapFrom).collect(Collectors.toList());
     }
 }

@@ -28,7 +28,7 @@ public class SwaggerConfig {
     private static ApiInfo getInfo() {
         return new ApiInfo(
                 "Ignitis homework RESTful API Documentation",
-                "This is a simple documentation using swagger and springFox",
+                "This is the Ignitis homework documentation",
                 "1.0.0",
                 null,
                 new Contact("Kristupas Jovaiša", null, "kristupas.jovaisa03@gmail.com"),

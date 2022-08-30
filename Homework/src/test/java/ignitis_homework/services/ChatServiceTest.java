@@ -7,7 +7,6 @@ import ignitis_homework.entities.User;
 import ignitis_homework.mappers.ChatMapper;
 import ignitis_homework.repositories.ChatRepository;
 import ignitis_homework.repositories.UserRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -19,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(MockitoExtension.class)
@@ -41,12 +41,12 @@ class ChatServiceTest {
 
         var chat = Chat.builder().id(1l).build();
         Mockito.when(chatRepository.findByUserIds(10l, 20l)).thenReturn(Optional.of(chat));
-        Mockito.when(mapper.mapfrom(chat)).thenReturn(ChatResponse.builder().id(2l).build());
+        Mockito.when(mapper.mapFrom(chat)).thenReturn(ChatResponse.builder().id(2l).build());
         var request = AddChatRequest.builder().receiverId(2l).build();
         var actual = chatService.addChat(request, 1l);
 
         Mockito.verify(chatRepository, Mockito.times(0)).save(any());
-        Assertions.assertEquals(2l, actual.get().getId());
+        assertEquals(2l, actual.get().getId());
     }
 
     @Test
@@ -62,10 +62,10 @@ class ChatServiceTest {
 
         var createdChat = Chat.builder().id(2l).build();
         Mockito.when(chatRepository.save(chat)).thenReturn(createdChat);
-        Mockito.when(mapper.mapfrom(createdChat)).thenReturn(ChatResponse.builder().id(3l).build());
+        Mockito.when(mapper.mapFrom(createdChat)).thenReturn(ChatResponse.builder().id(3l).build());
         var request = AddChatRequest.builder().receiverId(2l).build();
         var actual = chatService.addChat(request, 1l);
-        Assertions.assertEquals(3l, actual.get().getId());
+        assertEquals(3l, actual.get().getId());
     }
 
     @Test
@@ -76,11 +76,11 @@ class ChatServiceTest {
         Mockito.when(chatRepository.findAllByUserId(1l)).thenReturn(chats);
 
         ChatResponse response = ChatResponse.builder().id(2l).build();
-        Mockito.when(mapper.mapfrom(chat)).thenReturn(response);
+        Mockito.when(mapper.mapFrom(chat)).thenReturn(response);
 
         var actual = chatService.getChats(1l);
-        Mockito.verify(mapper, Mockito.times(1)).mapfrom(chat);
+        Mockito.verify(mapper, Mockito.times(1)).mapFrom(chat);
 
-        Assertions.assertEquals(1, actual.size());
+        assertEquals(1, actual.size());
     }
 }
