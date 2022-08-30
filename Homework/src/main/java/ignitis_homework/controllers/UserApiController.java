@@ -21,6 +21,7 @@ import java.util.List;
 @RequestMapping(UserApiController.USERS_ROOT_PATH)
 @RequiredArgsConstructor
 @OpenApi
+@ApiResponses(value = @ApiResponse(code = 401, message = "User must be authorized"))
 @Api(tags = "Users Controller")
 public class UserApiController {
 
@@ -32,11 +33,10 @@ public class UserApiController {
     public static final String USERS_USERID_CHATS_PATH = USERS_USERID_PATH + "/chats";
     public static final String USERS_USERID_CHATS_CHATID_MESSAGES_PATH = USERS_USERID_CHATS_PATH + "/{chatId}/messages";
 
-    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Get all the users", httpMethod = "GET")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Users returned successfully"),
-            @ApiResponse(code = 401, message = "User must be authorized")
+            @ApiResponse(code = 200, message = "Users returned successfully")
     })
     public ResponseEntity<List<UserResponse>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
@@ -45,8 +45,7 @@ public class UserApiController {
     @GetMapping(path = USERS_USERID_PATH)
     @ApiOperation(value = "Get a user by id", httpMethod = "GET")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "User returned successfully"),
-            @ApiResponse(code = 401, message = "User must be authorized")
+            @ApiResponse(code = 200, message = "User returned successfully")
     })
     public ResponseEntity<UserResponse> getUser(@PathVariable("userId") Long id) {
         var user = userService.getUser(id);
@@ -60,7 +59,6 @@ public class UserApiController {
     @ApiOperation(value = "Delete user", httpMethod = "DELETE")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "User deleted successfully"),
-            @ApiResponse(code = 401, message = "User must be authorized"),
             @ApiResponse(code = 403, message = "User is not granted to delete a user")
     })
     public ResponseEntity<Void> deleteUser(@PathVariable("userId") Long id) {
@@ -73,14 +71,13 @@ public class UserApiController {
     @GetMapping(path = USERS_USERID_CHATS_PATH)
     @ApiOperation(value = "Get all the chats of the user", httpMethod = "GET")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Chats returned successfully"),
-            @ApiResponse(code = 401, message = "User must be authorized")
+            @ApiResponse(code = 200, message = "Chats returned successfully")
     })
     public ResponseEntity<List<ChatResponse>> getChats(@PathVariable("userId") Long userId) {
         return ResponseEntity.ok(chatService.getChats(userId));
     }
 
-    @PostMapping(path = USERS_USERID_CHATS_PATH, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(path = USERS_USERID_CHATS_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(
             value = "Create chat",
             notes = "If chat already exists with the sender and receiver a new chat is not created, but returned the existing one." +
@@ -88,8 +85,7 @@ public class UserApiController {
             httpMethod = "POST"
     )
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Chat created successfully"),
-            @ApiResponse(code = 401, message = "User must be authorized")
+            @ApiResponse(code = 201, message = "Chat created successfully")
     })
     public ResponseEntity<ChatResponse> addChat(@PathVariable("userId") Long userId, @RequestBody AddChatRequest addChat) {
         var chat = chatService.addChat(addChat, userId);
@@ -102,18 +98,16 @@ public class UserApiController {
     @GetMapping(path = USERS_USERID_CHATS_CHATID_MESSAGES_PATH)
     @ApiOperation(value = "Get all the messages of the chat", httpMethod = "GET")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Messages returned successfully"),
-            @ApiResponse(code = 401, message = "User must be authorized")
+            @ApiResponse(code = 200, message = "Messages returned successfully")
     })
     public ResponseEntity<List<MessageResponse>> getAllMessages(@PathVariable("userId") Long userId, @PathVariable("chatId") Long chatId) {
         return ResponseEntity.ok(messageService.getAllMessages(userId, chatId));
     }
 
-    @PostMapping(path = USERS_USERID_CHATS_CHATID_MESSAGES_PATH, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(path = USERS_USERID_CHATS_CHATID_MESSAGES_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Create a message", httpMethod = "POST")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Message created successfully"),
-            @ApiResponse(code = 401, message = "User must be authorized")
+            @ApiResponse(code = 201, message = "Message created successfully")
     })
     public ResponseEntity<MessageResponse> addMessage(@PathVariable("userId") Long userId, @PathVariable("chatId") Long chatId, @RequestBody AddMessageRequest addMessage) {
         var message = messageService.addMessage(addMessage, userId, chatId);

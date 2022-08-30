@@ -29,7 +29,7 @@ public class ReportsApiController {
     public static final String REPORTS_USERS_PATH = "/users";
     public static final String REPORTS_USERS_USERID_PATH = REPORTS_USERS_PATH + "/{userId}";
 
-    @GetMapping(path = REPORTS_USERS_PATH, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(path = REPORTS_USERS_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Get all the reports about the users", httpMethod = "GET")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Reports returned successfully"),
@@ -39,7 +39,7 @@ public class ReportsApiController {
         return ResponseEntity.ok(userService.getUserReports());
     }
 
-    @GetMapping(path = REPORTS_USERS_USERID_PATH, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(path = REPORTS_USERS_USERID_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Get a report about the user", httpMethod = "GET")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Report returned successfully"),
