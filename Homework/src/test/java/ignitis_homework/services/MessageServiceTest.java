@@ -9,7 +9,6 @@ import ignitis_homework.mappers.MessageMapper;
 import ignitis_homework.repositories.ChatRepository;
 import ignitis_homework.repositories.MessageRepository;
 import ignitis_homework.repositories.UserRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -19,6 +18,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 class MessageServiceTest {
@@ -45,8 +46,8 @@ class MessageServiceTest {
 
         var actual = messageService.getAllMessages(1l, 1l);
         Mockito.verify(mapper, Mockito.times(1)).mapFrom(message);
-        Assertions.assertEquals(1, actual.size());
-        Assertions.assertEquals(2l, actual.get(0).getId());
+        assertEquals(1, actual.size());
+        assertEquals(2l, actual.get(0).getId());
     }
 
     @Test
@@ -65,6 +66,6 @@ class MessageServiceTest {
         Mockito.when(mapper.mapFrom(createdMessage)).thenReturn(MessageResponse.builder().id(3l).build());
 
         var actual = messageService.addMessage(request, 1l, 1l);
-        Assertions.assertEquals(3l, actual.get().getId());
+        assertEquals(3l, actual.get().getId());
     }
 }
