@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 @Component
 public class UserMapper {
     final PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-
     public User mapFrom(AddUserRequest request, Set<Authority> authority) {
         return User.builder().
                 name(request.getName()).
@@ -32,7 +31,6 @@ public class UserMapper {
                 .id(user.getId())
                 .name(user.getName())
                 .email(user.getEmail())
-                .password(user.getPassword())
                 .build();
     }
 

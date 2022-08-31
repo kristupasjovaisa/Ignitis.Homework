@@ -10,19 +10,16 @@
     <include file="/db/changelog/db-changelog.xml" />
     <changeSet id="INSERT USERS" author="Kristupas">
         <insert tableName="USERS">
-            <column name="ID" value="1"></column>
             <column name="EMAIL" value="user1@gmail.com"></column>
             <column name="PASSWORD" value="{bcrypt}$2a$12$s7p2wOpe6Jcc8xVM6hMZPO9a760Vy4DFuH5zy4tkw1tkA/NXAN.g6"></column>
             <column name="NAME" value="user"></column>
         </insert>
         <insert tableName="USERS">
-            <column name="ID" value="2"></column>
             <column name="EMAIL" value="user2@gmail.com"></column>
             <column name="PASSWORD" value="{bcrypt}$2a$10$auHiOfM5qK7.M2ghqP5X/.U2XOa2OjADI7X/6cM9MEI3HglrZuWLW"></column>
             <column name="NAME" value="user2"></column>
         </insert>
         <insert tableName="USERS">
-            <column name="ID" value="3"></column>
             <column name="EMAIL" value="user3@gmail.com"></column>
             <column name="PASSWORD" value="{bcrypt}$2a$12$XvVVt1EVPvaAGCo9Oxibq.fNGs03N0PyA/J1Wg7YchXWIH1bz9HL."></column>
             <column name="NAME" value="user3"></column>

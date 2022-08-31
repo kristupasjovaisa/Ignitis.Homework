@@ -1,9 +1,11 @@
 package ignitis_homework.security.dto;
 
-import lombok.Value;
+import lombok.Builder;
+import lombok.Data;
 
-@Value(staticConstructor = "of")
-public class LoginResponse {
+@Builder
+@Data
+public class AuthResponse {
     String name;
     String email;
     String jwtToken;

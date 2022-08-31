@@ -45,7 +45,7 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
         http = http
                 .authorizeRequests()
                 .antMatchers(
-                        "/login","/h2-console/**"
+                         "/login", "/h2-console/**"
                 ).permitAll()
                 .antMatchers(
                         "/swagger-ui/**",

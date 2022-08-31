@@ -1,6 +1,7 @@
 package ignitis_homework.security.dto;
 
 import ignitis_homework.dto.UserResponse;
+import ignitis_homework.entities.User;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,7 +14,7 @@ import java.util.Set;
 @Builder
 @Getter
 public class UserRoleDto implements UserDetails {
-    private UserResponse user;
+    private User user;
     @Builder.Default
     private Set<? extends GrantedAuthority> roles = new HashSet<>();
 

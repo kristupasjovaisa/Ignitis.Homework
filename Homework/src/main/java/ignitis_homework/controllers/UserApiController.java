@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,6 +39,7 @@ public class UserApiController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Users returned successfully")
     })
+    @PreAuthorize("hasRole('ROLE_Admin')")
     public ResponseEntity<List<UserResponse>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
@@ -47,6 +49,7 @@ public class UserApiController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "User returned successfully")
     })
+    @PreAuthorize("hasRole('ROLE_Admin')")
     public ResponseEntity<UserResponse> getUser(@PathVariable("userId") Long id) {
         var user = userService.getUser(id);
         if (user.isPresent()) {
@@ -61,6 +64,7 @@ public class UserApiController {
             @ApiResponse(code = 200, message = "User deleted successfully"),
             @ApiResponse(code = 403, message = "User is not granted to delete a user")
     })
+    @PreAuthorize("hasRole('ROLE_Admin')")
     public ResponseEntity<Void> deleteUser(@PathVariable("userId") Long id) {
         if (userService.deleteUser(id)) {
             return ResponseEntity.ok().build();
@@ -73,6 +77,7 @@ public class UserApiController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Chats returned successfully")
     })
+    @PreAuthorize("hasRole('ROLE_Admin')")
     public ResponseEntity<List<ChatResponse>> getChats(@PathVariable("userId") Long userId) {
         return ResponseEntity.ok(chatService.getChats(userId));
     }
@@ -100,6 +105,7 @@ public class UserApiController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Messages returned successfully")
     })
+    @PreAuthorize("hasRole('ROLE_Admin')")
     public ResponseEntity<List<MessageResponse>> getAllMessages(@PathVariable("userId") Long userId, @PathVariable("chatId") Long chatId) {
         return ResponseEntity.ok(messageService.getAllMessages(userId, chatId));
     }
