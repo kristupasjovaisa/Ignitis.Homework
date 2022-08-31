@@ -11,21 +11,21 @@
     <changeSet id="INSERT USERS" author="Kristupas">
         <insert tableName="USERS">
             <column name="ID" value="1"></column>
-            <column name="EMAIL" value="admin@gmail.com"></column>
+            <column name="EMAIL" value="user1@gmail.com"></column>
             <column name="PASSWORD" value="{bcrypt}$2a$12$s7p2wOpe6Jcc8xVM6hMZPO9a760Vy4DFuH5zy4tkw1tkA/NXAN.g6"></column>
-            <column name="NAME" value="Admin"></column>
-        </insert>
-        <insert tableName="USERS">
-            <column name="ID" value="2"></column>
-            <column name="EMAIL" value="user@gmail.com"></column>
-            <column name="PASSWORD" value="{bcrypt}$2a$10$auHiOfM5qK7.M2ghqP5X/.U2XOa2OjADI7X/6cM9MEI3HglrZuWLW"></column>
             <column name="NAME" value="user"></column>
         </insert>
         <insert tableName="USERS">
-            <column name="ID" value="3"></column>
+            <column name="ID" value="2"></column>
             <column name="EMAIL" value="user2@gmail.com"></column>
-            <column name="PASSWORD" value="user2"></column>
+            <column name="PASSWORD" value="{bcrypt}$2a$10$auHiOfM5qK7.M2ghqP5X/.U2XOa2OjADI7X/6cM9MEI3HglrZuWLW"></column>
             <column name="NAME" value="user2"></column>
+        </insert>
+        <insert tableName="USERS">
+            <column name="ID" value="3"></column>
+            <column name="EMAIL" value="user3@gmail.com"></column>
+            <column name="PASSWORD" value="{bcrypt}$2a$12$XvVVt1EVPvaAGCo9Oxibq.fNGs03N0PyA/J1Wg7YchXWIH1bz9HL."></column>
+            <column name="NAME" value="user3"></column>
         </insert>
     </changeSet>
     <changeSet id="INSERT CHATS" author="Kristupas">
@@ -58,28 +58,28 @@
         <insert tableName="MESSAGES">
             <column name="ID" value="1"></column>
             <column name="CREATED_AT" value="2022-01-01T00:00:00"></column>
-            <column name="TEXT" value="Hello user"></column>
+            <column name="TEXT" value="Hello user2"></column>
             <column name="CHAT_ID" value="1"></column>
             <column name="USER_ID" value="1"></column>
         </insert>
         <insert tableName="MESSAGES">
             <column name="ID" value="2"></column>
             <column name="CREATED_AT" value="2022-01-02T00:00:00"></column>
-            <column name="TEXT" value="Hello admin"></column>
+            <column name="TEXT" value="Hello user1"></column>
             <column name="CHAT_ID" value="1"></column>
             <column name="USER_ID" value="2"></column>
         </insert>
         <insert tableName="MESSAGES">
             <column name="ID" value="3"></column>
             <column name="CREATED_AT" value="2022-01-03T00:00:00"></column>
-            <column name="TEXT" value="Hello user2"></column>
+            <column name="TEXT" value="Hello user3"></column>
             <column name="CHAT_ID" value="2"></column>
             <column name="USER_ID" value="1"></column>
         </insert>
         <insert tableName="MESSAGES">
             <column name="ID" value="4"></column>
             <column name="CREATED_AT" value="2022-01-04T00:00:00"></column>
-            <column name="TEXT" value="Hello admin"></column>
+            <column name="TEXT" value="Hello user1"></column>
             <column name="CHAT_ID" value="2"></column>
             <column name="USER_ID" value="3"></column>
         </insert>
@@ -91,6 +91,10 @@
         </insert>
         <insert tableName="AUTHORITIES">
             <column name="ID" value="2"></column>
+            <column name="ROLE" value="Manager"></column>
+        </insert>
+        <insert tableName="AUTHORITIES">
+            <column name="ID" value="3"></column>
             <column name="ROLE" value="User"></column>
         </insert>
     </changeSet>
