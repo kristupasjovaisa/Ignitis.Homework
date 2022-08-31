@@ -12,7 +12,7 @@
         <insert tableName="USERS">
             <column name="ID" value="1"></column>
             <column name="EMAIL" value="admin@gmail.com"></column>
-            <column name="PASSWORD" value="{bcrypt}$2a$10$U0rw8mXTThEiAWkjTdcwPO5Zy0PXklz/QuzuxW95N2y1P10SORJjC"></column>
+            <column name="PASSWORD" value="{bcrypt}$2a$12$s7p2wOpe6Jcc8xVM6hMZPO9a760Vy4DFuH5zy4tkw1tkA/NXAN.g6"></column>
             <column name="NAME" value="Admin"></column>
         </insert>
         <insert tableName="USERS">
@@ -86,17 +86,17 @@
     </changeSet>
     <changeSet id="INSERT AUTHORITIES" author="Kristupas">
         <insert tableName="AUTHORITIES">
-            <column name="NAME" value="Admin"></column>
+            <column name="ID" value="1"></column>
+            <column name="ROLE" value="Admin"></column>
         </insert>
         <insert tableName="AUTHORITIES">
-            <column name="NAME" value="User"></column>
+            <column name="ID" value="2"></column>
+            <column name="ROLE" value="User"></column>
         </insert>
     </changeSet>
     <changeSet id="INSERT USERS_AUTHORITIES" author="Kristupas">
         <insert tableName="USERS_AUTHORITIES">
-            <column name="USERS_ENTITY_ID" value="1"></column>
-        </insert>
-        <insert tableName="AUTHORITIES">
+            <column name="USER_ID" value="1"></column>
             <column name="AUTHORITIES_ID" value="1"></column>
         </insert>
     </changeSet>

@@ -17,9 +17,10 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
+  allowed:
+    resources: /h2-console/**
   liquibase:
-    change-log: classpath:db/changelog/db-changelog.xml
-  security:
-    user:
-      password: sa
-      name: sa
+    change-log: classpath:db/changelog/db-initdata.xml
+security:
+  jwt:
+    validity-time: 30

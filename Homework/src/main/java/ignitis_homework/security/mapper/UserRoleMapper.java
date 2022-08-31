@@ -1,5 +1,6 @@
 package ignitis_homework.security.mapper;
 
+import ignitis_homework.dto.UserResponse;
 import ignitis_homework.entities.Authority;
 import ignitis_homework.entities.User;
 import ignitis_homework.security.dto.UserRoleDto;
@@ -14,7 +15,7 @@ public class UserRoleMapper {
 
     public UserRoleDto mapUserRoleFrom(User user) {
         return UserRoleDto.builder()
-                .user(User.builder()
+                .user(UserResponse.builder()
                         .id(user.getId())
                         .name(user.getName())
                         .email(user.getEmail())
