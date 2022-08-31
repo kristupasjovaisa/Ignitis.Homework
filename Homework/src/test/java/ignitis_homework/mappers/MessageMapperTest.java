@@ -37,11 +37,14 @@ class MessageMapperTest {
     @Test
     void mapToMessageEntity() {
         var request = AddMessageRequest.builder().text("request").build();
-        var user = User.builder().id(1l).build();
+        var sender = User.builder().id(1l).build();
+        var receiver = User.builder().id(2l).build();
         var chat = Chat.builder().id(1l).build();
-        var actual = messageMapper.mapFrom(request, user, chat);
+
+        var actual = messageMapper.mapFrom(request, sender, receiver, chat);
         assertEquals("request", actual.getText());
-        assertEquals(1, actual.getUser().getId());
+        assertEquals(1, actual.getOwner().getId());
+        assertEquals(2, actual.getReceiver().getId());
         assertEquals(1, actual.getChat().getId());
         assertNotNull(actual.getCreatedAt());
     }

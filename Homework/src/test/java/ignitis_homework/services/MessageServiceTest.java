@@ -52,14 +52,17 @@ class MessageServiceTest {
 
     @Test
     void addMessage() {
-        var userEntity = User.builder().id(2l).build();
-        Mockito.when(userRepository.findById(1l)).thenReturn(Optional.of(userEntity));
-        var chat = Chat.builder().id(2l).users(List.of(User.builder().id(1l).build())).build();
+        var sender = User.builder().id(1l).build();
+        var receiver = User.builder().id(2l).build();
+        Mockito.when(userRepository.findById(1l)).thenReturn(Optional.of(sender));
+        Mockito.when(userRepository.findById(2l)).thenReturn(Optional.of(receiver));
+
+        var chat = Chat.builder().id(2l).users(List.of(sender, receiver)).build();
         Mockito.when(chatRepository.findById(1l)).thenReturn(Optional.of(chat));
 
         var message = Message.builder().id(1l).build();
-        var request = AddMessageRequest.builder().text("text").build();
-        Mockito.when(mapper.mapFrom(request, userEntity, chat))
+        var request = AddMessageRequest.builder().receiverId(2l).build();
+        Mockito.when(mapper.mapFrom(request, sender, receiver, chat))
                 .thenReturn(message);
         var createdMessage = Message.builder().id(2l).build();
         Mockito.when(messageRepository.save(message)).thenReturn(createdMessage);

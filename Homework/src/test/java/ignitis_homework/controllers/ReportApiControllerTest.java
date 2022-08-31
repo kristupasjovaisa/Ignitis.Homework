@@ -22,9 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(controllers = ReportApiController.class)
 class ReportApiControllerTest {
-
     private MockMvc mockMvc;
-
     @MockBean
     private UserService userService;
 
@@ -49,7 +47,7 @@ class ReportApiControllerTest {
     void getUserReportByUserId() throws Exception {
         var response = UserReportResponse.builder().lastMessageText("text").build();
         when(userService.getUserReport(1l)).thenReturn(Optional.of(response));
-        mockMvc.perform(MockMvcRequestBuilders.get("/reports/users/{userId}",1))
+        mockMvc.perform(MockMvcRequestBuilders.get("/reports/users/{userId}", 1))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string(asJsonString(response)));
     }

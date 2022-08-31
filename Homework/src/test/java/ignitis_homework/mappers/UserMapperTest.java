@@ -47,7 +47,7 @@ class UserMapperTest {
                 .text("123456789")
                 .build();
 
-        var user = User.builder().messages(List.of(message1, message2)).build();
+        var user = User.builder().createdMessages(List.of(message1, message2)).build();
         Mockito.when(userMapper.mapFrom(user)).thenReturn(UserResponse.builder().id(1l).build());
         var actual = userMapper.mapToReportFrom(user);
         assertEquals(1l, actual.getUser().getId());
