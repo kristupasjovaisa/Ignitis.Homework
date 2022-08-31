@@ -34,20 +34,29 @@ public class MessageService {
         return Collections.emptyList();
     }
 
-    public Optional<MessageResponse> addMessage(AddMessageRequest message, Long userId, Long chatId) {
-        var user = userRepository.findById(userId);
+    public Optional<MessageResponse> addMessage(AddMessageRequest message, Long senderId, Long chatId) {
+        var sender = userRepository.findById(senderId);
+        var receiver = userRepository.findById(message.getReceiverId());
         var chat = chatRepository.findById(chatId);
-        if (user.isPresent() && chat.isPresent()) {
-            if (isChatContainingUser(chat.get(), userId)) {
-                var createdChat = messageRepository.save(mapper.mapFrom(message, user.get(), chat.get()));
+        if (sender.isPresent() && receiver.isPresent() && chat.isPresent()) {
+            if (isChatContainingUser(chat.get(), sender.get().getId(), receiver.get().getId())) {
+                var createdChat = messageRepository.save(mapper.mapFrom(message, sender.get(), receiver.get(), chat.get()));
                 return Optional.of(mapper.mapFrom(createdChat));
             }
         }
         return Optional.empty();
     }
 
+    private boolean isChatContainingUser(Chat chat, Long senderId, Long receiverId) {
+        var userIds = getUserIds(chat);
+        return userIds.contains(senderId) && userIds.contains(receiverId);
+    }
+
     private boolean isChatContainingUser(Chat chat, Long userId) {
-        var userIds = chat.getUsers().stream().map(user -> user.getId()).collect(Collectors.toList());
-        return userIds.contains(userId);
+        return getUserIds(chat).contains(userId);
+    }
+
+    public List<Long> getUserIds(Chat chat) {
+        return chat.getUsers().stream().map(user -> user.getId()).collect(Collectors.toList());
     }
 }

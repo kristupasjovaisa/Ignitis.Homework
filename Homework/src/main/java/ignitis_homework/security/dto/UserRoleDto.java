@@ -1,6 +1,5 @@
 package ignitis_homework.security.dto;
 
-import ignitis_homework.dto.UserResponse;
 import ignitis_homework.entities.User;
 import lombok.Builder;
 import lombok.Getter;

@@ -17,8 +17,6 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
-  allowed:
-    resources: /h2-console/**
   liquibase:
     change-log: classpath:db/changelog/db-initdata.xml
 security:

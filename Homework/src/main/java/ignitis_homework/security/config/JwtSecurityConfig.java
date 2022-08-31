@@ -20,7 +20,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 @RequiredArgsConstructor
 public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
-
     private final UserDetailsService userDetailsService;
     private final JwtProvider jwtProvider;
 
@@ -45,7 +44,7 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
         http = http
                 .authorizeRequests()
                 .antMatchers(
-                         "/login", "/h2-console/**"
+                        "/login", "/h2-console/**"
                 ).permitAll()
                 .antMatchers(
                         "/swagger-ui/**",

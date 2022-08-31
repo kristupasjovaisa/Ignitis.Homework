@@ -35,19 +35,20 @@ public class JwtProvider {
     private SecretKey secretKey;
 
     @PostConstruct
-    protected void init(){
+    protected void init() {
         secretKey = Keys.secretKeyFor(signatureAlgorithm);
     }
+
     public String getToken(UserRoleDto principal) {
         final Date now = new Date();
         return Jwts.builder()
-                .setHeaderParam("typ","JWT")
+                .setHeaderParam("typ", "JWT")
                 .setIssuer("Iginitis_Homework-api")
                 .setAudience("Iginitis_Homework-ui")
                 .setSubject(principal.getUsername())
                 .setIssuedAt(now)
                 .setExpiration(new Date(now.getTime() + tokenValidityInMillis))
-                .claim("roles",principal.getAuthorities().stream()
+                .claim("roles", principal.getAuthorities().stream()
                         .map(GrantedAuthority::getAuthority).collect(Collectors.toSet()))
                 .signWith(secretKey)
                 .compact();
@@ -69,9 +70,9 @@ public class JwtProvider {
 
         var entity = userRepository.findUserByEmailWithAuthorities(username);
         if (entity.isPresent()) {
-            return new UsernamePasswordAuthenticationToken(userRoleMapper.mapUserRoleFrom(entity.get()),null, authorities);
+            return new UsernamePasswordAuthenticationToken(userRoleMapper.mapUserRoleFrom(entity.get()), null, authorities);
         }
-        return new UsernamePasswordAuthenticationToken(null,null, authorities);
+        return new UsernamePasswordAuthenticationToken(null, null, authorities);
     }
 
     public Long getExpiresInSeconds() {

@@ -13,7 +13,7 @@ public class ChatMapper {
 
     public UserMapper userMapper;
 
-    public ChatResponse mapFrom(Chat chat){
+    public ChatResponse mapFrom(Chat chat) {
         return ChatResponse
                 .builder()
                 .id(chat.getId())
@@ -24,7 +24,7 @@ public class ChatMapper {
                 .build();
     }
 
-    public Chat mapFrom(User sender, User receiver){
+    public Chat mapFrom(User sender, User receiver) {
         return Chat.builder()
                 .users(List.of(sender, receiver))
                 .build();

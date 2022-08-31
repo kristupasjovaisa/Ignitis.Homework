@@ -24,10 +24,13 @@ public class User {
     private String email;
     private String password;
 
-    @OneToMany(mappedBy = "user")
-    private List<Message> messages;
+    @OneToMany(mappedBy = "owner")
+    private List<Message> createdMessages;
 
-    @ManyToMany(mappedBy = "users",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "receiver")
+    private List<Message> receivedMessages;
+
+    @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL)
     private List<Chat> chats;
 
     @ManyToMany

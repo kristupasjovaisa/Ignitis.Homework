@@ -20,10 +20,11 @@ public class MessageMapper {
                 .build();
     }
 
-    public Message mapFrom(AddMessageRequest message, User user, Chat chat) {
+    public Message mapFrom(AddMessageRequest message, User sender, User receiver, Chat chat) {
         return Message.builder()
                 .chat(chat)
-                .user(user)
+                .owner(sender)
+                .receiver(receiver)
                 .text(message.getText())
                 .createdAt(new Timestamp(System.currentTimeMillis()))
                 .build();

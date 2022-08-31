@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 @Component
 public class UserMapper {
     final PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+
     public User mapFrom(AddUserRequest request, Set<Authority> authority) {
         return User.builder().
                 name(request.getName()).
@@ -36,7 +37,7 @@ public class UserMapper {
 
     public UserReportResponse mapToReportFrom(User user) {
         var userResponse = mapFrom(user);
-        var messages = user.getMessages().stream().sorted(Comparator.comparing(Message::getCreatedAt)).collect(Collectors.toList());
+        var messages = user.getCreatedMessages().stream().sorted(Comparator.comparing(Message::getCreatedAt)).collect(Collectors.toList());
         var lastMessage = messages.stream().reduce((first, second) -> second);
         var firstMessage = messages.stream().findFirst();
         var messagesCount = messages.size();

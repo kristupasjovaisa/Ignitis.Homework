@@ -18,9 +18,12 @@ public class Message {
     private String text;
     private Timestamp createdAt;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Chat chat;
 
-    @ManyToOne
-    private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User owner;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User receiver;
 }
