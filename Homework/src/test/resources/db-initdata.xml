@@ -13,19 +13,19 @@
             <column name="ID" value="1"></column>
             <column name="EMAIL" value="admin@gmail.com"></column>
             <column name="PASSWORD" value="{bcrypt}$2a$10$U0rw8mXTThEiAWkjTdcwPO5Zy0PXklz/QuzuxW95N2y1P10SORJjC"></column>
-            <column name="NAME" value="Admin"></column>
+            <column name="NAME" value="user1"></column>
         </insert>
         <insert tableName="USERS">
             <column name="ID" value="2"></column>
             <column name="EMAIL" value="user@gmail.com"></column>
             <column name="PASSWORD" value="{bcrypt}$2a$10$auHiOfM5qK7.M2ghqP5X/.U2XOa2OjADI7X/6cM9MEI3HglrZuWLW"></column>
-            <column name="NAME" value="user"></column>
+            <column name="NAME" value="user2"></column>
         </insert>
         <insert tableName="USERS">
             <column name="ID" value="3"></column>
-            <column name="EMAIL" value="user2@gmail.com"></column>
-            <column name="PASSWORD" value="user2"></column>
-            <column name="NAME" value="user2"></column>
+            <column name="EMAIL" value="use32@gmail.com"></column>
+            <column name="PASSWORD" value="{bcrypt}$2a$12$XvVVt1EVPvaAGCo9Oxibq.fNGs03N0PyA/J1Wg7YchXWIH1bz9HL."></column>
+            <column name="NAME" value="user3"></column>
         </insert>
     </changeSet>
     <changeSet id="INSERT CHATS" author="Kristupas">
@@ -82,6 +82,26 @@
             <column name="TEXT" value="Hello user1"></column>
             <column name="CHAT_ID" value="2"></column>
             <column name="USER_ID" value="3"></column>
+        </insert>
+    </changeSet>
+    <changeSet id="INSERT AUTHORITIES" author="Kristupas">
+        <insert tableName="AUTHORITIES">
+            <column name="ID" value="1"></column>
+            <column name="ROLE" value="Admin"></column>
+        </insert>
+        <insert tableName="AUTHORITIES">
+            <column name="ID" value="2"></column>
+            <column name="ROLE" value="Manager"></column>
+        </insert>
+        <insert tableName="AUTHORITIES">
+            <column name="ID" value="3"></column>
+            <column name="ROLE" value="User"></column>
+        </insert>
+    </changeSet>
+    <changeSet id="INSERT USERS_AUTHORITIES" author="Kristupas">
+        <insert tableName="USERS_AUTHORITIES">
+            <column name="USER_ID" value="1"></column>
+            <column name="AUTHORITIES_ID" value="1"></column>
         </insert>
     </changeSet>
 </databaseChangeLog>
