@@ -42,10 +42,12 @@ class UserServiceTest {
         var user = User.builder().id(1l).build();
         Mockito.when(authorityRepository.findAllByRoles(request.getRoles())).thenReturn(Set.of(authority));
         Mockito.when(mapper.mapFrom(request, Set.of(authority))).thenReturn(user);
+        var createdUser = User.builder().id(2l).build();
+        Mockito.when(userRepository.save(user)).thenReturn(createdUser);
+        Mockito.when(mapper.mapFrom(createdUser)).thenReturn(UserResponse.builder().id(3l).build());
 
-        Mockito.when(mapper.mapFrom(userRepository.save(user))).thenReturn(UserResponse.builder().id(2l).build());
         var actual = userService.addUser(request);
-        assertEquals(2, actual.getId());
+        assertEquals(3, actual.getId());
     }
 
     @Test
