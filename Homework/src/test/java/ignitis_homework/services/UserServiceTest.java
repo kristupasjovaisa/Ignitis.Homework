@@ -2,9 +2,12 @@ package ignitis_homework.services;
 
 import ignitis_homework.dto.UserReportResponse;
 import ignitis_homework.dto.UserResponse;
+import ignitis_homework.entities.Authority;
 import ignitis_homework.entities.User;
 import ignitis_homework.mappers.UserMapper;
+import ignitis_homework.repositories.AuthorityRepository;
 import ignitis_homework.repositories.UserRepository;
+import ignitis_homework.security.dto.AddUserRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -15,6 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -27,6 +31,22 @@ class UserServiceTest {
     private UserMapper mapper;
     @Mock
     private UserRepository userRepository;
+
+    @Mock
+    private AuthorityRepository authorityRepository;
+
+    @Test
+    void addUser() {
+        var request = AddUserRequest.builder().roles(List.of("Admin")).build();
+        var authority = Authority.builder().role("Manager").build();
+        var user = User.builder().id(1l).build();
+        Mockito.when(authorityRepository.findAllByRoles(request.getRoles())).thenReturn(Set.of(authority));
+        Mockito.when(mapper.mapFrom(request, Set.of(authority))).thenReturn(user);
+
+        Mockito.when(mapper.mapFrom(userRepository.save(user))).thenReturn(UserResponse.builder().id(2l).build());
+        var actual = userService.addUser(request);
+        assertEquals(2, actual.getId());
+    }
 
     @Test
     void deleteUser() {
