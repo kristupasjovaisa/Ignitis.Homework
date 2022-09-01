@@ -7,7 +7,7 @@
       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
       http://www.liquibase.org/xml/ns/pro
       http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
-    <include file="/db/changelog/db-changelog.xml" />
+    <include file="/db/dev/db-changelog.xml" />
     <changeSet id="INSERT USERS" author="Kristupas">
         <insert tableName="USERS">
             <column name="EMAIL" value="user1@gmail.com"></column>
