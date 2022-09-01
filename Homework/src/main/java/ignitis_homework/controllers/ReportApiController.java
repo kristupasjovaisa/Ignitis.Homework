@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,7 @@ public class ReportApiController {
             @ApiResponse(code = 200, message = "Reports returned successfully"),
             @ApiResponse(code = 403, message = "User is not granted to get the reports")
     })
+    @PreAuthorize("hasRole('ROLE_Admin')")
     public ResponseEntity<List<UserReportResponse>> getUsersReports() {
         return ResponseEntity.ok(userService.getUserReports());
     }
@@ -45,6 +47,7 @@ public class ReportApiController {
             @ApiResponse(code = 200, message = "Report returned successfully"),
             @ApiResponse(code = 403, message = "User is not granted to get the report")
     })
+    @PreAuthorize("hasRole('ROLE_Admin')")
     public ResponseEntity<UserReportResponse> getUserReportByUserId(@PathVariable("userId") Long userId) {
         var response = userService.getUserReport(userId);
         if (response.isPresent()) {

@@ -1,7 +1,6 @@
 package ignitis_homework.entities;
 
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -19,9 +18,12 @@ public class Message {
     private String text;
     private Timestamp createdAt;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Chat chat;
 
-    @ManyToOne
-    private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User owner;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User receiver;
 }

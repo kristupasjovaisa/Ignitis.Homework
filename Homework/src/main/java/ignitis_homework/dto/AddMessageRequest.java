@@ -11,4 +11,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AddMessageRequest {
     private String text;
+    private Long receiverId;
 }

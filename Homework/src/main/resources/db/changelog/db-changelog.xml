@@ -26,6 +26,9 @@
             <column name="NAME" type="varchar(25)">
                 <constraints nullable="false"/>
             </column>
+            <column name="PASSWORD" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
     <changeSet id="CREATE TABLE MESSAGES" author="Kristupas">
@@ -42,8 +45,11 @@
             <column name="CHAT_ID" type="bigint">
                 <constraints nullable="false" foreignKeyName="FK_CHAT_ID" references="CHATS(id)"/>
             </column>
-            <column name="USER_ID" type="bigint">
-                <constraints nullable="false" foreignKeyName="FK_USER_ID" references="USERS(id)"/>
+            <column name="OWNER_ID" type="bigint">
+                <constraints nullable="false" foreignKeyName="FK_OWNER_ID" references="USERS(id)"/>
+            </column>
+            <column name="RECEIVER_ID" type="bigint">
+                <constraints nullable="false" foreignKeyName="FK_RECEIVER_ID" references="USERS(id)"/>
             </column>
         </createTable>
     </changeSet>
@@ -54,6 +60,26 @@
             </column>
             <column name="USERS_ID" type="bigint">
                 <constraints nullable="false" foreignKeyName="FK_USERS_ID" references="USERS(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="CREATE TABLE AUTHORITIES" author="Kristupas">
+        <createTable tableName="AUTHORITIES">
+            <column name="ID" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_AUTHORITIES"/>
+            </column>
+            <column name="ROLE" type="varchar(25)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="CREATE TABLE USERS_AUTHORITIES" author="Kristupas">
+        <createTable tableName="USERS_AUTHORITIES">
+            <column name="USER_ID" type="bigint">
+                <constraints nullable="false" foreignKeyName="FK_USERS_ENTITY_ID" references="USERS(id)"/>
+            </column>
+            <column name="AUTHORITIES_ID" type="bigint">
+                <constraints nullable="false" foreignKeyName="FK_AUTHORITIES_ID" references="AUTHORITIES(id)"/>
             </column>
         </createTable>
     </changeSet>

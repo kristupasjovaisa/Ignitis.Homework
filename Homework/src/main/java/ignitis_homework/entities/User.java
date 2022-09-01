@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Builder
@@ -15,15 +16,23 @@ import java.util.List;
 @Getter
 @Table(name = "users")
 public class User {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String email;
+    private String password;
 
-    @OneToMany(mappedBy = "user")
-    private List<Message> messages;
+    @OneToMany(mappedBy = "owner")
+    private List<Message> createdMessages;
 
-    @ManyToMany(mappedBy = "users",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "receiver")
+    private List<Message> receivedMessages;
+
+    @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL)
     private List<Chat> chats;
+
+    @ManyToMany
+    private Set<Authority> authorities;
 }

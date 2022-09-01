@@ -18,4 +18,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
   liquibase:
-    change-log: classpath:db/changelog/db-changelog.xml
+    change-log: classpath:db/changelog/db-initdata.xml
+security:
+  jwt:
+    validity-time: 30

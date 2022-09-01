@@ -2,6 +2,7 @@ package ignitis_homework.controllers;
 
 import ignitis_homework.common.OpenApi;
 import ignitis_homework.dto.*;
+import ignitis_homework.security.dto.AddUserRequest;
 import ignitis_homework.services.ChatService;
 import ignitis_homework.services.MessageService;
 import ignitis_homework.services.UserService;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -55,12 +57,24 @@ public class UserApiController {
         return ResponseEntity.notFound().build();
     }
 
+    @PostMapping
+    @ApiOperation(value = "Add a user", httpMethod = "POST")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "User added successfully"),
+            @ApiResponse(code = 403, message = "User is not granted to add a user")
+    })
+    @PreAuthorize("hasRole('ROLE_Admin')")
+    public ResponseEntity<UserResponse> addUser(@RequestBody AddUserRequest request) {
+        return new ResponseEntity<>(userService.addUser(request), HttpStatus.CREATED);
+    }
+
     @DeleteMapping(path = USERS_USERID_PATH)
     @ApiOperation(value = "Delete user", httpMethod = "DELETE")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "User deleted successfully"),
             @ApiResponse(code = 403, message = "User is not granted to delete a user")
     })
+    @PreAuthorize("hasRole('ROLE_Admin')")
     public ResponseEntity<Void> deleteUser(@PathVariable("userId") Long id) {
         if (userService.deleteUser(id)) {
             return ResponseEntity.ok().build();
@@ -84,9 +98,7 @@ public class UserApiController {
                     "Otherwise a new chat is created and returned.",
             httpMethod = "POST"
     )
-    @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Chat created successfully")
-    })
+    @ApiResponses(value = @ApiResponse(code = 201, message = "Chat created successfully"))
     public ResponseEntity<ChatResponse> addChat(@PathVariable("userId") Long userId, @RequestBody AddChatRequest addChat) {
         var chat = chatService.addChat(addChat, userId);
         if (chat.isPresent()) {
@@ -97,20 +109,16 @@ public class UserApiController {
 
     @GetMapping(path = USERS_USERID_CHATS_CHATID_MESSAGES_PATH)
     @ApiOperation(value = "Get all the messages of the chat", httpMethod = "GET")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Messages returned successfully")
-    })
+    @ApiResponses(value = @ApiResponse(code = 200, message = "Messages returned successfully"))
     public ResponseEntity<List<MessageResponse>> getAllMessages(@PathVariable("userId") Long userId, @PathVariable("chatId") Long chatId) {
         return ResponseEntity.ok(messageService.getAllMessages(userId, chatId));
     }
 
     @PostMapping(path = USERS_USERID_CHATS_CHATID_MESSAGES_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Create a message", httpMethod = "POST")
-    @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Message created successfully")
-    })
-    public ResponseEntity<MessageResponse> addMessage(@PathVariable("userId") Long userId, @PathVariable("chatId") Long chatId, @RequestBody AddMessageRequest addMessage) {
-        var message = messageService.addMessage(addMessage, userId, chatId);
+    @ApiResponses(value = @ApiResponse(code = 201, message = "Message created successfully"))
+    public ResponseEntity<MessageResponse> addMessage(@PathVariable("userId") Long senderId, @PathVariable("chatId") Long chatId, @RequestBody AddMessageRequest addMessage) {
+        var message = messageService.addMessage(addMessage, senderId, chatId);
         if (message.isPresent()) {
             return new ResponseEntity<>(message.get(), HttpStatus.CREATED);
         }
