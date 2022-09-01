@@ -36,6 +36,7 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     testImplementation group: 'org.springframework.security', name: 'spring-security-test', version: '4.2.3.RELEASE'
+    implementation group: 'postgresql', name: 'postgresql', version: '9.1-901-1.jdbc4'
 }
 
 tasks.named('test') {

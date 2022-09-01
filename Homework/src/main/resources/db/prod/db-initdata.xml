@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+      http://www.liquibase.org/xml/ns/pro
+      http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
+    <include file="/db/prod/db-changelog.xml" />
+    <changeSet id="INSERT USERS" author="Kristupas">
+        <insert tableName="USERS">
+            <column name="EMAIL" value="admin"></column>
+            <column name="PASSWORD" value="{bcrypt}$2a$12$s7p2wOpe6Jcc8xVM6hMZPO9a760Vy4DFuH5zy4tkw1tkA/NXAN.g6"></column>
+            <column name="NAME" value="admin"></column>
+        </insert>
+    </changeSet>
+    <changeSet id="INSERT AUTHORITIES" author="Kristupas">
+        <insert tableName="AUTHORITIES">
+            <column name="ID" value="1"></column>
+            <column name="ROLE" value="Admin"></column>
+        </insert>
+        <insert tableName="AUTHORITIES">
+            <column name="ID" value="3"></column>
+            <column name="ROLE" value="User"></column>
+        </insert>
+    </changeSet>
+    <changeSet id="INSERT USERS_AUTHORITIES" author="Kristupas">
+        <insert tableName="USERS_AUTHORITIES">
+            <column name="USER_ID" value="1"></column>
+            <column name="AUTHORITIES_ID" value="1"></column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
