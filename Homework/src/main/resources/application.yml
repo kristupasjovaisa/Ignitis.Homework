@@ -19,9 +19,6 @@ spring:
         format_sql: true
   liquibase:
     change-log: classpath:db/prod/db-initdata.xml
-  servlet:
-    multipart:
-      max-file-size: 10MB
 security:
   jwt:
     # validity time in minutes

@@ -5,6 +5,14 @@ REST API Spring Boot Project
 * Java 11+
 * Gradle 7.5
 
+### Dependencies
+* Liquibase
+* H2 Database
+* Postgresql
+* Springfox Swagger2
+* Spring Security
+* Lombok
+
 ### Access the application
 http://localhost:8080
 
